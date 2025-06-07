@@ -235,11 +235,15 @@ def get_pn(l):
 
 #################### Check if PlateNumber stored in sys. or Not################
 def check_db(pn):
-    
-     connection = psycopg2.connect(user = "postgres",password = "123456789",
-                                       host = "127.0.0.1",
-                                       port = "5432",
-                                       database = "plates")
+     db_params = {
+         "user": os.getenv("DB_USER", "postgres"),
+         "password": os.getenv("DB_PASSWORD", ""),
+         "host": os.getenv("DB_HOST", "127.0.0.1"),
+         "port": os.getenv("DB_PORT", "5432"),
+         "database": os.getenv("DB_NAME", "plates"),
+     }
+
+     connection = psycopg2.connect(**db_params)
 
      cursor = connection.cursor()
      postgreSQL_select_Query = "select * from plates where license_plate=N{}".format(pn)

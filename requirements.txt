@@ -1,0 +1,10 @@
+flask
+psycopg2-binary
+numpy
+opencv-python
+scikit-learn
+keras
+pandas
+pillow
+h5py
+matplotlib
